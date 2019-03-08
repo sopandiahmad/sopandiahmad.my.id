@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sopandiahmad.web.id</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100dvh;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            color: white;
+            text-align: center;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .content-box {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 50px;
+            border-radius: 30px;
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .spinner-svg {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        #timer-text {
+            font-size: 50px;
+            font-weight: 800;
+            margin: 10px 0;
+        }
+
+        h2 { margin: 0; font-weight: 400; font-size: 18px; opacity: 0.9; }
+        
+        .footer-note {
+            margin-top: 30px;
+            font-size: 12px;
+            opacity: 0.7;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid white;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-box">
+        <svg class="spinner-svg" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="20" fill="none" stroke="white" stroke-width="4" stroke-dasharray="31.4" stroke-linecap="round"></circle>
+        </svg>
+        <h2>Mengalihkan dalam</h2>
+        <div id="timer-text">10</div>
+        <p style="font-size: 14px; margin-top: 20px;">Menuju: <strong id="urlTujuan">url tujuan</strong></p>
+        
+        <div class="footer-note">
+            Gagal berpindah? <a id="manual" href="#">Klik tautan ini</a>
+        </div>
+    </div>
+
+    <script>
+        const URL_TUJUAN = "https://www.sopandiahmad.web.id";
+        let sisa = 10;
+        document.getElementById('manual').href = URL_TUJUAN;
+        document.getElementById('urlTujuan').innerText = URL_TUJUAN.replace(/^https?:\/\/(www\.)?/, "");
+    	document.title = "Redirecting to " + URL_TUJUAN.replace(/^https?:\/\/(www\.)?/, "");
+
+        const hitungMundur = setInterval(() => {
+            sisa--;
+            document.getElementById('timer-text').innerText = sisa;
+            if (sisa <= 0) {
+                clearInterval(hitungMundur);
+                window.location.href = URL_TUJUAN;
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
